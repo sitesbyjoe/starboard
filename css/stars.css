@@ -1,6 +1,10 @@
 body {
 	font-size: 100%;
-	background: #f2f2f2;
+	background: #131516;
+	padding: 0;
+	margin: 0;
+	font-size: 130% !important;
+	padding: 10px;
 }
 
 @keyframes animatedBackground {
@@ -9,20 +13,18 @@ body {
 }
 
 .header {
-	padding: 3em;
-	text-align: center;
-	margin-bottom: 1em;
-	border-bottom: rgba(0,0,0,0.2) solid 1px;
-	background: #2980B9 url(../images/bg.jpg) repeat-x;
-	/*-webkit-background-size: cover; /*for webKit*/
-	-moz-background-size: cover; /*Mozilla*/
-	-o-background-size: cover; /*opera*/
-	background-size: cover; /*generic*/
+	background: #000;
 	color: #fff;
 }
 
 .header h1 {
-	font-size: 400%;
+	font-size: 2rem;
+	margin-top: 0;
+}
+
+.header i {
+	font-size: 2rem;
+	color: #ffc544;
 }
 
 .form {
@@ -31,8 +33,17 @@ body {
 
 label {
 	display: block;
-	color: rgba(0,0,0,0.4);
-	font-size: 80%;
+	color: #333;
+	font-weight: bold;
+	font-size: 1rem;
+}
+
+select {
+	width: 100%;
+}
+
+textarea {
+	width: 95%;
 }
 
 em {
@@ -47,19 +58,27 @@ table {
 	font-size: 100%;
 	margin-bottom: 2em;
 	margin-top: 1em;
-	border: 1px solid rgba(0,0,0,0.2);
-	background: #fff;
-	border-radius: 4px;
+	background: #000;
 }
 
 th {
 	text-align: left;
 	padding: 0.5em;
+	color: #515252;
 }
 
 tbody td {
-	border-top: 1px solid rgba(0,0,0,0.05);
+	border-top: 6px solid rgba(255,255,255,0.05);
 	padding: 0.5em;
+	color: #fff;
+}
+
+tbody td i {
+	color: #ffc544;
+}
+
+td.name {
+	text-transform: uppercase;
 }
 
 .btn-container {
@@ -79,12 +98,10 @@ tbody td {
 }
 
 .star-count {
-	color: rgba(0,0,0,0.4);
+	color: rgba(255,255,255,0.3);
 }
 
-@media (max-width: 767px) {
-	.header {
-		margin-left: -20px;
-		margin-right: -20px;
-	}
+.modal {
+	width: 300px;
+	margin-left: -150px;
 }
