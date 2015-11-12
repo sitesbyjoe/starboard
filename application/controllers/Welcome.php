@@ -7,48 +7,30 @@ class Welcome extends CI_Controller {
 				parent::__construct();
 		}
 
-		//$this->load->library('database');
-
-		function index()
+		public function index()
 		{
-				$data['stars'] = self::get_stars();
-				$data['votes'] = self::get_votes();
+				$data['stars'] = $this->Star_model->get_stars();
+				$data['votes'] = $this->Star_model->get_votes();
 				$this->load->view('stars', $data);
-		}
-		
-		private function get_stars()
-		{
-				// returns all the people
-				$this->db->order_by('name', 'asc');
-				return $this->db->get('people');
-		}
-		
-		function get_votes()
-		{
-				$this->db->order_by('votes.timestamp', 'desc');
-				return $this->db->get('votes');
 		}
 		
 		function vote($vote_from, $vote_to, $reason)
 		{
 				// get the person's current number of stars
-				$this->db->select('stars');
-				$this->db->where('id', $vote_to);
-				$stars = $this->db->get('people')->row();
+				$stars = $this->Star_model->get_star_count($vote_to)->row();
 
 				// build the array for our record with incremented starts
 				$data = array(
 						'stars' => $stars->stars + 1
 				);
 				
-				// update the people table record
-				$this->db->where('id', $vote_to);
-				$this->db->update('people', $data);
+				// update the people table record with the new star value
+				$this->Star_model->update_person($vote_to, $data);
 				
+				// get the star giver's info
 				$this->db->where('id', $vote_from);
 				$query = $this->db->get('people');
 				$from = $query->row()->name;
-				
 				
 				// record the vote in the votes table
 				$vote = array(
@@ -57,10 +39,8 @@ class Welcome extends CI_Controller {
 						'reason' => $reason
 				);
 				
-				$this->db->insert('votes', $vote);
-				//return $this->db->rows_affected();
+				$this->Star_model->save_vote($vote);
 				
-				$this->load->library('email');
 				// let the person know they got a star!
 				$this->load->library('email');
 				/*
